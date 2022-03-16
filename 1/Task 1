@@ -1,0 +1,46 @@
+const sentence = "Smart people learn from everything and everyone, average people from their experience, stupid people already, have all the answers" ; 
+
+
+function getLongestString(str){
+	let longestString = "";
+	let currentString = "";
+    function compareString(){
+      if(currentString.length > longestString.length){
+        longestString = currentString
+      } else if (currentString.length === longestString.length){
+        longestString =  handleDraw(currentString, longestString)
+      }
+      currentString = ""
+    }
+	for (let i=0; i<str.length;i++){
+      const char = str[i].toLowerCase()
+      // if its character
+      if(char.toUpperCase() !== char ){
+        currentString += char
+      }
+      // if its beside character
+      else {
+      	compareString()
+      }
+    }
+  // handle last word
+  compareString()
+  
+      
+  
+  // handle if the string have same length. only count vowel. 
+  // if its same vowel then newer string win
+  function handleDraw(str1, str2){
+   	const vowel = /[aiueo]/gi
+	const len1 = str1.match(vowel).length
+  	const len2 = str2.match(vowel).length
+    if (len1 > len2){
+      return str1
+    } else {
+      return str2
+    }
+  }
+  return longestString
+}
+
+console.log(getLongestString(sentence))
